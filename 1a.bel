@@ -1,0 +1,4 @@
+(prn
+  (reduce +
+    (map [- (floor (/ _ 3)) 2]
+      (from "1.txt" (drain (read))))))
