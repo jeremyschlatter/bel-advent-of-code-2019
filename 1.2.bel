@@ -1,0 +1,10 @@
+(def fuel (x)
+  (if (< x 9)
+      0
+      (let r (- (floor (/ x 3)) 2)
+        (+ r (fuel r)))))
+
+(prn
+  (reduce +
+    (map fuel
+      (from "1.txt" (drain (read))))))
