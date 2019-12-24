@@ -1,0 +1,20 @@
+(set input (from "2.txt" (cons (read) (drain (do (rdc) (read))))))
+
+(def execute (noun verb)
+  (let p (apply list input)
+    (set (2 p) noun)
+    (set (3 p) verb)
+    (loop pc 1 (+ pc 4) (~= (pc p) 99)
+      (withs (at [(inc ((+ _ pc) p)) p]
+              op [set (at 3) (_ (at 1) (at 2))])
+        (case (pc p)
+          1 (op +)
+          2 (op *))))
+    (1 p)))
+
+(prn
+  (catch
+    (for noun 0 99
+      (for verb 0 99
+        (if (= (execute noun verb) 19690720)
+            (throw (+ (* 100 noun) verb)))))))
