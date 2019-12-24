@@ -1,0 +1,15 @@
+(def execute (pc p)
+  (withs (at [(inc ((+ _ pc) p)) p]
+          op [do (set (at 3) (_ (at 1) (at 2)))
+                 (execute (+ pc 4) p)])
+    (case (pc p)
+      1 (op +)
+      2 (op *)
+      99 p)))
+
+(set input (from "2.txt" (cons (read) (drain (do (rdc) (read))))))
+
+(set (2 input) 12)
+(set (3 input) 2)
+
+(prn (1 (execute 1 input)))
